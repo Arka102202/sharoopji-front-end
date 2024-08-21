@@ -122,3 +122,53 @@ nav p{
 
     font-weight: lighter;
 }
+
+/* feature section */
+
+.silder-box {
+    margin: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* width: 100%; */
+}
+
+.slider {
+    overflow: hidden;
+    position: relative;
+    /* height: 100vh; */
+    width: 100%;
+    /* margin: auto; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slide {
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    transition-timing-function: ease-in-out;
+    transition-property: transform;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* background-color: #56a1a7; */
+
+    pointer-events: none;
+}
+
+.slider-1-slide img{
+    width: 30%;
+
+    margin-bottom: 1rem;
+}
+
+.slider-1-slide p{
+    width: 50%;
+    text-align: center;
+}
