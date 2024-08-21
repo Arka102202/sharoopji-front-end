@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'cera-md';
+    src: url('Cera\ Pro\ Medium.otf') format('opentype');
+    font-weight: lighter; /* Adjust weight if necessary */
+    font-style: normal;  /* Adjust style if necessary */
+}
+
+@font-face {
+    font-family: 'cera';
+    src: url('Cera\ Pro\ Regular.otf') format('opentype');
+    font-weight: normal; /* Adjust weight if necessary */
+    font-style: normal;  /* Adjust style if necessary */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "cera";
+}
+
+html {
+    --main-clr: #10997c;
+
+    font-family: sans-serif;
+}
+
+/* general */
+
+img {
+    width: 100%;
+}
+
+section {
+}
+
+/* header */
+
+header {
+    background-color: var(--main-clr);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+
+    padding: 0 2%;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    color: #fff;
+    font-weight: normal;
+}
+
+nav p{
+    padding: 1rem .5rem;
+    font-size: .8rem;
+}
+
+.logo-box--1 {
+    width: 8%;
+}
+.logo-box--2 {
+    width: 10%;
+}
+
+/* hero section */
+
+.hero-sec {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url("./images/hero-sec-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+
+    gap: 8rem;
+
+    width: 100%;
+    aspect-ratio: 4/2 ;
+
+    padding: 8rem;
+    padding-bottom: 5rem;
+    color: #fff;
+}
+
+.top-heading-1{
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+    font-family: "cera-md";
+}
+.top-heading-2{
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: "cera-md";
+}
+
+.hero-sec .btm{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+
+    gap: 1rem;
+
+    letter-spacing: 2px;
+
+    font-weight: lighter;
+}
