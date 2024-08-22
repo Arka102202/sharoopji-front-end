@@ -71,11 +71,13 @@ window.addEventListener("load", () => {
       dots = document.querySelectorAll(`.dots-${i} .dot`);
     }
 
+    let height = -1;
+
     // providing the initial translation to each slide
     slides.forEach((el, idx) => {
       // providing height to the slider box according the slide
-      const height = window.getComputedStyle(el).height;
-      sliderBox.style.height = height;
+      const tempHeight = parseFloat(window.getComputedStyle(el).height);
+      height = tempHeight > height ? tempHeight : height;
       updateTranslationNDotClass(el, translateArrs, dots, idx, i, 0, initialSlideCount);
       el.className = `slide-${idx} ` + el.className;
       if (idx === initialSlideCount - 1) {
@@ -84,14 +86,19 @@ window.addEventListener("load", () => {
       }
     });
 
+    sliderBox.style.height = height+"px";
+
     slides = document.querySelectorAll(`.slider-${i} .slide`);
     slidesCount = slides.length;
 
     window.addEventListener("resize", () => {
+      let height = -1;
       slides.forEach(el => {
-        const height = window.getComputedStyle(el).height;
+        const tempHeight = parseFloat(window.getComputedStyle(el).height);
+        height = tempHeight > height ? tempHeight : height;
         sliderBox.style.height = height;
       });
+      sliderBox.style.height = height+"px";
     })
 
     const removeExtraSlide = () => {
@@ -120,6 +127,8 @@ window.addEventListener("load", () => {
       })
 
       translateArrs[i - 1] = arr;
+
+      return [slides, translateArrs];
     };
 
     let timeoutId = 0;
@@ -251,7 +260,7 @@ window.addEventListener("load", () => {
     if (isDragable) {
       sliderBox.addEventListener("mousedown", (e) => {
         e.preventDefault();
-        [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement);
+        [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement, removeExtraSlide);
 
         // getting the initial position
         initialPos = e.pageX - sliderBox.offsetLeft;
@@ -260,7 +269,7 @@ window.addEventListener("load", () => {
 
       sliderBox.addEventListener("touchstart", (e) => {
 
-        [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement);
+        [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement, removeExtraSlide);
         // getting the initial position
         initialPos = e.touches[0].pageX - sliderBox.offsetLeft;
         isMouseDown = true;
@@ -325,12 +334,14 @@ window.addEventListener("load", () => {
   }
 
 
-  function afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement) {
+  function afterMouseMovesDown(slides, e, timeoutId, intervalId, translateArrs, i, slidesCount, initialSlideCount, maxDisplacement, minDisplacement, displacement, initialDisplacement, removeExtraSlide) {
     e.stopPropagation();
 
     // clearing all the interval and timeouts
     clearTimeout(timeoutId);
     clearInterval(intervalId);
+
+    [slides, translateArrs] = removeExtraSlide();
 
     let lastZerothIdx = null, prevToFirstSlideIdx = null, elToRemoveIdx = [];
 
@@ -356,10 +367,11 @@ window.addEventListener("load", () => {
 
     cloneAddTranslate(slides[lastZerothIdx], maxDisplacement);
 
-    console.log("----------------------------------- ");
-    elToRemoveIdx.forEach(el => console.log(slides[el]));
-    slides.forEach(el => console.log(el));
-    console.log("----------------------------------- \n\n\n\n");
+    // console.log("####################################################################################\n ");
+    // elToRemoveIdx.forEach(el => console.log(slides[el]));
+    // console.log("####################################################################################\n ");
+    // slides.forEach(el => console.log(el));
+    // console.log("####################################################################################\n \n\n\n\n");
     // console.log(translateArrs[i - 1]);
 
     removeSlides(elToRemoveIdx, slides);
@@ -400,7 +412,7 @@ window.addEventListener("load", () => {
 
     let displaceAmount = 0, currentZero = -1, prevZero = -1;
 
-    if (Math.abs(oldWalkingDistance) > 30) {
+    if (Math.abs(oldWalkingDistance) > 10) {
       displaceAmount = oldWalkingDistance > 0 ? -displacement : displacement;
     }
 
