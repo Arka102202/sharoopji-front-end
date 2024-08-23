@@ -197,16 +197,16 @@ nav p {
     /* border: 0.01rem solid #000; */
     transition: all 0.5s ease-in-out;
     cursor: pointer;
-    background-color: rgb(194, 194, 194);
+    background-color: rgb(255, 187, 187);
 }
 
 @media (min-width: 1000px) {
     .dot:hover {
-        background-color: #fff;
+        background-color: #ff0808;
     }
 }
 
 .dot-active {
-    background-color: #fff;
+    background-color: #34ffae;
     border-radius: 10rem;
 }

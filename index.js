@@ -86,7 +86,7 @@ window.addEventListener("load", () => {
       }
     });
 
-    sliderBox.style.height = height+"px";
+    sliderBox.style.height = height + "px";
 
     slides = document.querySelectorAll(`.slider-${i} .slide`);
     slidesCount = slides.length;
@@ -98,7 +98,7 @@ window.addEventListener("load", () => {
         height = tempHeight > height ? tempHeight : height;
         sliderBox.style.height = height;
       });
-      sliderBox.style.height = height+"px";
+      sliderBox.style.height = height + "px";
     })
 
     const removeExtraSlide = () => {
@@ -128,12 +128,13 @@ window.addEventListener("load", () => {
 
       translateArrs[i - 1] = arr;
 
-      return [slides, translateArrs];
+      // return [slides, translateArrs];
     };
 
     let timeoutId = 0;
 
     const intervalFn = () => {
+      removeExtraSlide();
       let addingIdx = -1;
 
       // first translation each slide by 100% to the left
@@ -162,7 +163,7 @@ window.addEventListener("load", () => {
         });
 
         // changing the opacity of the slide with translation = -100
-        timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs)
+        // timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs)
       }, durationOfTimeoutAfterInterval)
     };
 
@@ -245,7 +246,7 @@ window.addEventListener("load", () => {
         }, 100)
 
 
-        timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs);
+        // timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs);
         if (autoSlide)
           intervalId = setInterval(intervalFn, intervalDurationMs);
 
@@ -341,20 +342,23 @@ window.addEventListener("load", () => {
     clearTimeout(timeoutId);
     clearInterval(intervalId);
 
-    [slides, translateArrs] = removeExtraSlide();
+    // [slides, translateArrs] = removeExtraSlide();
 
     let lastZerothIdx = null, prevToFirstSlideIdx = null, elToRemoveIdx = [];
 
     for (let idx = 0; idx < slidesCount; idx++) {
       const val = translateArrs[i - 1][idx];
       const slideActualIdx = +slides[idx].classList[0].split("-").at(-1);
-      if (val === minDisplacement) {
-        const firstSlideIdx = +slides[idx].classList[0].split("-").at(-1);
-        prevToFirstSlideIdx = firstSlideIdx === 0 ? initialSlideCount - 1 : firstSlideIdx - 1;
+      // if (val === minDisplacement) {
+      //   const firstSlideIdx = +slides[idx].classList[0].split("-").at(-1);
+      //   prevToFirstSlideIdx = firstSlideIdx === 0 ? initialSlideCount - 1 : firstSlideIdx - 1;
+      // }
+
+      // if (slideActualIdx === prevToFirstSlideIdx) prevToFirstSlideIdx = idx;
+
+      if (val === maxDisplacement - (2 * displacement)) {
+        prevToFirstSlideIdx = idx;
       }
-
-      if (slideActualIdx === prevToFirstSlideIdx) prevToFirstSlideIdx = idx;
-
 
       if (val === initialDisplacement) {
         lastZerothIdx = idx;
@@ -424,8 +428,8 @@ window.addEventListener("load", () => {
       if (translateArrs[i - 1][idx] === initialDisplacement) currentZero = +el.classList[0].split("-").at(-1);
     });
 
-    slides = document.querySelectorAll(`.slider-${i} .slide`);
-    slidesCount = slides.length;
+    // slides = document.querySelectorAll(`.slider-${i} .slide`);
+    // slidesCount = slides.length;
 
     oldWalkingDistance = 0;
 
@@ -434,8 +438,8 @@ window.addEventListener("load", () => {
       dots[currentZero].classList.add("dot-active");
     }
 
-    const timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs);
-    // const timeoutId = 0;
+    let timeoutId = 0;
+    // timeoutId = setTimeout(removeExtraSlide, timeoutDurationMs);
     let intervalId = 0;
     if (autoSlide)
       intervalId = setInterval(intervalFn, intervalDurationMs);
