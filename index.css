@@ -156,7 +156,7 @@ nav p {
     left: 0;
     transition-timing-function: ease-in-out;
     transition-property: transform;
-    width: 25%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -167,13 +167,14 @@ nav p {
     pointer-events: none;
 }
 
-.slider-1-slide img {
+
+.slide img {
     width: 30%;
 
     margin-bottom: 1rem;
 }
 
-.slider-1-slide p {
+.slide p {
     width: 50%;
     text-align: center;
 }

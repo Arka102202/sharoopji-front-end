@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+document.addEventListener('DOMContentLoaded', function () {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////// ----------------------------- Slider Code -----------------------------////////////////////////////////
@@ -23,7 +23,7 @@ window.addEventListener("load", () => {
   let initialPos = 0;
 
   // different timings for different timing functions
-  const timeoutDurationMs = 600, intervalDurationMs = 5000, durationOfTimeoutAfterInterval = 10;
+  const animationDuration = "1s", intervalDurationMs = 5000, durationOfTimeoutAfterInterval = 10;
   // const timeoutDurationMs = 10000, intervalDurationMs = 15000, durationOfTimeoutAfterInterval = 2000;
 
 
@@ -60,7 +60,8 @@ window.addEventListener("load", () => {
     const dotBox = document.querySelector(`.dots-${i}`);
     let dots = [];
 
-    if (showDots) {// creating and adding dots to the dot box
+    // creating and adding dots to the dot box
+    if (showDots) {
       for (let j = 0; j < slidesCount; j++) {
         const dot = document.createElement("div");
         dot.classList.add("dot");
@@ -99,7 +100,7 @@ window.addEventListener("load", () => {
         sliderBox.style.height = height;
       });
       sliderBox.style.height = height + "px";
-    })
+    });
 
     const removeExtraSlide = () => {
 
@@ -123,7 +124,7 @@ window.addEventListener("load", () => {
       slidesCount = slides.length;
 
       slides.forEach(el => {
-        el.style.transitionDuration = `.5s`;
+        el.style.transitionDuration = animationDuration;
       })
 
       translateArrs[i - 1] = arr;
@@ -156,7 +157,7 @@ window.addEventListener("load", () => {
         slides.forEach((el, idx) => {
           translateArrs[i - 1][idx] -= displacement;
           updateTranslationNDotClass(el, translateArrs, dots, idx, i, nextDotIdx, initialSlideCount);
-          el.style.transitionDuration = `.5s`;
+          el.style.transitionDuration = animationDuration;
         });
 
       }, durationOfTimeoutAfterInterval)
@@ -178,46 +179,35 @@ window.addEventListener("load", () => {
 
         removeExtraSlide();
 
-
         const nxtDotIdx = idx;
 
         let currentSlidePosition = 0, currentDotIdx = 0, maxTranslatedSlideIdx = 0;
 
-        for (let slideIdx = 0; slideIdx < slides.length; slideIdx++) {
-          const slideActualIdx = +slides[slideIdx].classList[0].split("-").at(-1);
+        // Calculate positions and indices
+        slides.forEach((slide, slideIdx) => {
+          const slideActualIdx = +slide.classList[0].split("-").at(-1);
 
-          if (translateArrs[i - 1][slideIdx] !== minDisplacement && slideActualIdx === nxtDotIdx) {
-            currentSlidePosition = translateArrs[i - 1][slideIdx];
-          } if (translateArrs[i - 1][slideIdx] === initialDisplacement) {
+          const translation = translateArrs[i - 1][slideIdx];
+
+          if (translation === initialDisplacement) {
             currentDotIdx = slideActualIdx;
-          } if (translateArrs[i - 1][slideIdx] === maxDisplacement - displacement) {
+          } else if (translation !== minDisplacement && slideActualIdx === nxtDotIdx) {
+            currentSlidePosition = translation;
+          } else if (translation === maxDisplacement - displacement) {
             maxTranslatedSlideIdx = slideActualIdx;
           }
-        }
-
+        });
 
         const arr = [];
-        let arrCurrIdx = 0, count = 0;
-
+        let arrCurrIdx = 0;
 
         slides.forEach((slide, idx) => {
           arr[arrCurrIdx] = translateArrs[i - 1][idx];
           slide.style.transform = `translate(${arr[arrCurrIdx++]}%, 0)`;
 
-          const slideActualIdx = +slides[idx].classList[0].split("-").at(-1);
-
           if (translateArrs[i - 1][idx] !== minDisplacement) {
-            let newSlideTranslation = 0;
-
-            if (slideActualIdx <= maxTranslatedSlideIdx) {
-              newSlideTranslation = (maxDisplacement + (((initialSlideCount - maxTranslatedSlideIdx) - 1 + slideActualIdx) * displacement));
-            } else {
-              newSlideTranslation = maxDisplacement + (count * displacement);
-              count++;
-            }
-
-            cloneAddTranslate(slide, newSlideTranslation);
-            arr[arrCurrIdx++] = newSlideTranslation;
+            cloneAddTranslate(slide, translateArrs[i - 1][idx] + (maxDisplacement - initialDisplacement));
+            arr[arrCurrIdx++] = translateArrs[i - 1][idx] + (maxDisplacement - initialDisplacement);
           }
         });
 
@@ -227,17 +217,13 @@ window.addEventListener("load", () => {
         slidesCount = slides.length;
 
         setTimeout(() => {
-          const arr = [];
           slides.forEach((el, idx) => {
-            arr[idx] = translateArrs[i - 1][idx] - currentSlidePosition + initialDisplacement;
+            translateArrs[i - 1][idx] -= (currentSlidePosition - initialDisplacement);
             el.style.transform = `translate(${arr[idx]}%, 0)`;
           });
 
-          translateArrs[i - 1] = arr;
-
           dots[currentDotIdx].classList.remove("dot-active");
           dots[nxtDotIdx].classList.add("dot-active");
-
 
         }, 100)
 
@@ -399,7 +385,7 @@ window.addEventListener("load", () => {
     }
 
     slides.forEach((el, idx) => {
-      el.style.transitionDuration = `.5s`
+      el.style.transitionDuration = animationDuration
       el.style.transform = `translate(${translateArrs[i - 1][idx] + displaceAmount}%, 0)`;
       if (translateArrs[i - 1][idx] === initialDisplacement) prevZero = +el.classList[0].split("-").at(-1);
       translateArrs[i - 1][idx] += displaceAmount;
