@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // to keep track of the exact translations of all the slides of individual sliders
   let translateArrs = [];
 
+  // 2nd arrow box
+  const arrowBox2 = document.querySelector(".arrow-box-2");
+
   // adding one array for each sliders
   for (let i = 0; i < sliderCount; i++) {
     translateArrs.push([]);
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     sliderBox.style.height = height + "px";
+    if (i == 2) arrowBox2.style.height = height + "px";
 
     slides = document.querySelectorAll(`.slider-${i} .slide`);
     slidesCount = slides.length;
@@ -100,7 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sliderBox.style.height = height;
       });
       sliderBox.style.height = height + "px";
-    });
+      if (i == 2) arrowBox2.style.height = height + "px";
+    })
 
     const removeExtraSlide = () => {
 
