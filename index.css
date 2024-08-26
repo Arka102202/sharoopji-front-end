@@ -37,108 +37,19 @@ img {
 }
 
 .heading{
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: center;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
  .sub-heading{
     font-size: 1rem;
     text-align: center;
+
+    color: #5f5f5f;
 }
 
 section {}
-
-/* header */
-
-header {
-    background-color: var(--main-clr);
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-
-    width: 100vw;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 5%;
-
-    padding: 0 2%;
-}
-
-nav {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 2rem;
-    color: #fff;
-    font-weight: normal;
-}
-
-nav p {
-    padding: 1rem .5rem;
-    font-size: .8rem;
-}
-
-.logo-box--1 {
-    width: 8%;
-}
-
-.logo-box--2 {
-    width: 10%;
-}
-
-/* hero section */
-
-.hero-sec {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./images/hero-sec-bg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: end;
-
-    gap: 8rem;
-
-    width: 100%;
-    aspect-ratio: 4/2;
-
-    padding: 8rem;
-    padding-bottom: 5rem;
-    color: #fff;
-}
-
-.top-heading-1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: .5rem;
-    font-family: "cera-md";
-}
-
-.top-heading-2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    font-family: "cera-md";
-}
-
-.hero-sec .btm {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-
-    gap: 1rem;
-
-    letter-spacing: 2px;
-
-    font-weight: lighter;
-}
 
 /* slider section */
 
@@ -235,11 +146,11 @@ nav p {
 
 .arrow-box .left-arr,
 .arrow-box .right-arr{
-    width: 5%;
+    width: 4%;
 
     padding: .5rem;
 
-    background-color: #10997d;
+    background-color: var(--main-clr);
 
     border-radius: var(--border-rad);
 
@@ -249,7 +160,98 @@ nav p {
 .arrow-box .left-arr:hover,
 .arrow-box .right-arr:hover{
     cursor: pointer;
-    background-color: #13b695;
+    background-color: #0d977c;
+}
+
+/* header */
+
+header {
+    background-color: var(--main-clr);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5%;
+
+    padding: 0 2%;
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+    color: #fff;
+    font-weight: normal;
+}
+
+nav p {
+    padding: 1rem .5rem;
+    font-size: .8rem;
+}
+
+.logo-box--1 {
+    width: 8%;
+}
+
+.logo-box--2 {
+    width: 10%;
+}
+
+/* hero section */
+
+.hero-sec {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./images/hero-sec-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+
+    gap: 8rem;
+
+    width: 100%;
+    aspect-ratio: 4/2;
+
+    padding: 8rem;
+    padding-bottom: 5rem;
+    color: #fff;
+}
+
+.top-heading-1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: .5rem;
+    font-family: "cera-md";
+}
+
+.top-heading-2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: "cera-md";
+}
+
+.hero-sec .btm {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+
+    gap: 1rem;
+
+    letter-spacing: 2px;
+
+    font-weight: lighter;
 }
 
 /* feature section */
@@ -268,7 +270,7 @@ nav p {
 .floor-plan{
     padding: 4rem 8rem;
 }
- .sub-heading{
+.floor-plan .sub-heading{
     text-align: start;
     font-size: 1.2rem;
     font-weight: 700;
@@ -286,7 +288,7 @@ nav p {
     width: 100%;
 
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 72% 28%;
 
     flex: 1 0 0%;
 }
@@ -315,4 +317,69 @@ nav p {
 .floor-plan .arrow-box .left-arr img,
 .floor-plan .arrow-box .right-arr img{
     filter: invert(1);
+}
+
+/* gallery */
+
+.gallery{
+    padding: 2rem 8rem;
+
+    background-color: var(--main-clr); 
+    color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.gallery .heading{
+    text-align: start;
+}
+.gallery .sub-heading{
+    text-align: start;
+    font-size: 1rem;
+    color: #fff;
+
+    margin-bottom: 2rem;
+}
+
+.tab-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    border: 1px solid #fff;
+
+    border-radius: var(--border-rad);
+    flex: 0 1 0%;
+
+    margin-bottom: 2rem;
+}
+
+.tab{
+    padding: .3rem .5rem;
+    transition: all .2s;
+}
+
+.tab-active{
+    background-color: #fff;
+    color: #232323;
+    border-right: 1px solid #fff;
+}
+
+.gallery .silder-box{
+    margin: 0;
+}
+
+.slider-3-slide{
+    width: 60%;
+}
+
+.gallery .arrow-box .left-arr,
+.gallery .arrow-box .right-arr{
+    background-color: #fff;
+
 }
