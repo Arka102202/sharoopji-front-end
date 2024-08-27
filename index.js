@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // each slide
     let slides = document.querySelectorAll(`.slider-${i} .slide`);
+    const leftBtn = document.querySelector(`.left-arr-${i}`);
+    const rightBtn = document.querySelector(`.right-arr-${i}`);
+
+    let isButtonDisabled = false;
 
     // amount of displacement each time
     const displacement = +sliderBox.dataset.displacement;
@@ -236,6 +240,48 @@ document.addEventListener('DOMContentLoaded', function () {
           intervalId = setInterval(intervalFn, intervalDurationMs);
 
       })
+    })
+
+
+    // add eventListener to btns
+    leftBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isButtonDisabled) return;
+
+      isButtonDisabled = true;
+      leftBtn.style.cursor = "not-allowed";
+      [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, intervalId, translateArrs, i, maxDisplacement, minDisplacement, displacement, initialDisplacement);
+
+      setTimeout(() => {
+        [isMouseDown, intervalId, oldWalkingDistance] = afterMouseMovesUp(slides, translateArrs, i, -100, dots, intervalFn, e, displacement, initialDisplacement, autoSlide);
+      }, 100);
+
+      setTimeout(() => {
+        isButtonDisabled = false;
+        leftBtn.style.cursor = "pointer";
+      }, 600);
+
+    });
+
+    rightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isButtonDisabled) return;
+
+      isButtonDisabled = true;
+      rightBtn.style.cursor = "not-allowed";
+      [lastZerothIdx, tempTranslationArr, slides, slidesCount] = afterMouseMovesDown(slides, e, intervalId, translateArrs, i, maxDisplacement, minDisplacement, displacement, initialDisplacement);
+
+      setTimeout(() => {
+        [isMouseDown, intervalId, oldWalkingDistance] = afterMouseMovesUp(slides, translateArrs, i, +100, dots, intervalFn, e, displacement, initialDisplacement, autoSlide);
+      }, 100);
+
+      setTimeout(() => {
+        isButtonDisabled = false;
+        rightBtn.style.cursor = "pointer";
+      }, 1000);
+
     })
 
     // events to swipe the silds

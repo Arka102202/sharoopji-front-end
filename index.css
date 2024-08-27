@@ -93,16 +93,6 @@ section {}
     pointer-events: none;
 }
 
-.slider-1-slide img {
-    width: 30%;
-
-    margin-bottom: 1rem;
-}
-
-.slider-1-slide p {
-    width: 50%;
-    text-align: center;
-}
 
 .dots {
     display: flex;
@@ -161,7 +151,7 @@ section {}
 .arrow-box .left-arr:hover,
 .arrow-box .right-arr:hover {
     cursor: pointer;
-    background-color: #0d977c;
+    background-color: #1ce0b9;
 }
 
 /* header */
@@ -265,6 +255,17 @@ nav p {
     align-items: center;
 
     padding: 4rem 8rem;
+}
+
+.slider-1-slide img {
+    width: 30%;
+
+    margin-bottom: 1rem;
+}
+
+.slider-1-slide p {
+    width: 50%;
+    text-align: center;
 }
 
 /* floor-plan */
@@ -383,6 +384,10 @@ nav p {
 
 .gallery .arrow-box .left-arr,
 .gallery .arrow-box .right-arr {
-    background-color: #fff;
+    background-color: #d4d4d4;
+}
 
+.gallery .arrow-box .left-arr:hover,
+.gallery .arrow-box .right-arr:hover {
+    background-color: #fff;
 }
