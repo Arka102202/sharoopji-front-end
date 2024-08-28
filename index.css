@@ -135,8 +135,8 @@ section {}
     gap: 2rem;
 }
 
-.arrow-box .left-arr,
-.arrow-box .right-arr {
+.left-arr,
+.right-arr {
     width: 4%;
 
     padding: .5rem;
@@ -148,8 +148,8 @@ section {}
     transition: all .2s;
 }
 
-.arrow-box .left-arr:hover,
-.arrow-box .right-arr:hover {
+.left-arr:hover,
+.right-arr:hover {
     cursor: pointer;
     background-color: #1ce0b9;
 }
@@ -390,4 +390,56 @@ nav p {
 .gallery .arrow-box .left-arr:hover,
 .gallery .arrow-box .right-arr:hover {
     background-color: #fff;
+}
+
+/* amenity-sec */
+
+.amenity-sec {
+    padding: 2% 8%;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    gap: 4%;
+
+    grid-template-columns: 25% 42% 25%;
+
+    width: 100%;
+    height: 80vh;
+}
+
+.amenity-sec .left-arr,
+.amenity-sec .right-arr {
+    width: 15%;
+}
+
+.left-box {
+    align-self: end;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    gap: .3rem;
+
+    width: 80%;
+}
+
+.center-box {
+    align-self: start;
+}
+
+.center-box .heading {
+    width: 20rem;
+    text-align: start;
+}
+
+.right-box {
+    align-self: start;
+
+    padding-top: 6rem;
+
+    width: 80%;
 }
