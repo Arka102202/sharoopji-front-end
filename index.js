@@ -468,6 +468,104 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+
+
+  ///////////////////////////////////////////// videos //////////////////////////////////
+
+  const vdoBoxes = document.querySelectorAll(".vdo-box");
+  const videos = [];
+  const vdoTransLationArr = [];
+  const leftBtn = document.querySelector(".amenity-sec .left-arr");
+  const rightBtn = document.querySelector(".amenity-sec .right-arr");
+
+
+
+  vdoBoxes.forEach(el => {
+    el.style.height = window.getComputedStyle(el.querySelector("img")).height;
+
+    videos.push(el.querySelectorAll("img"))
+  })
+
+  window.addEventListener("resize", () => {
+    vdoBoxes.forEach(el => {
+      el.style.height = window.getComputedStyle(el.querySelector("img")).height;
+    })
+  })
+
+
+  videos.forEach(box => {
+    const tempArr = [];
+    box.forEach((el, idx) => {
+      el.style.transform = `translateX(${idx * 100}%)`;
+      tempArr.push(idx * 100);
+    });
+    vdoTransLationArr.push(tempArr);
+  })
+
+  console.log(vdoBoxes, vdoTransLationArr);
+
+  leftBtn.addEventListener("click", () => {
+
+    vdoTransLationArr.forEach((arr, i) => {
+
+      for (let j = 0; j < arr.length; j++) {
+        const el = arr[j];
+        if (el === (arr.length - 1) * -100) break;
+        arr[j] -= 100;
+        videos[i][j].style.transform = `translateX(${arr[j]}%)`;
+      }
+    })
+
+
+  })
+
+  rightBtn.addEventListener("click", () => {
+
+    vdoTransLationArr.forEach((arr, i) => {
+
+      for (let j = 0; j < arr.length; j++) {
+        const el = arr[j];
+        if (j === 0 && el === 0) break;
+        console.log(el);
+        arr[j] += 100;
+        videos[i][j].style.transform = `translateX(${arr[j]}%)`;
+      }
+    })
+
+
+  })
+
+
+  // for the map ////////////////////////////////////////////////////////////////////////////////
+
+
+  // Get all elements with class 'tile'
+  const tiles = document.querySelectorAll('.connect-sec .right-box');
+
+  // Function to set up each tile
+  tiles.forEach(tile => {
+
+    // Mouseover event to scale the photo
+    tile.addEventListener('mouseover', function () {
+      tile.querySelector(".map-active").style.transform = `scale(2)`;
+    });
+
+    // Mouseout event to reset the scale
+    tile.addEventListener('mouseout', function () {
+      tile.querySelector(".map-active").style.transform = 'scale(1)';
+    });
+
+    // Mousemove event to adjust the transform-origin
+    tile.addEventListener('mousemove', function (e) {
+      const rect = tile.getBoundingClientRect();
+      const offsetX = ((e.clientX - rect.left) / tile.offsetWidth) * 100;
+      const offsetY = ((e.clientY - rect.top) / tile.offsetHeight) * 100;
+      tile.querySelector(".map-active").style.transformOrigin = `${offsetX}% ${offsetY}%`;
+    });
+  });
+
+
+
 })
 
 const cloneAddTranslate = (elToClone, translate) => {
