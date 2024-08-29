@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('load', function () {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ////////////////////// ----------------------------- Slider Code -----------------------------////////////////////////////////
@@ -42,10 +42,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let isButtonDisabled = false;
 
     // amount of displacement each time
-    const displacement = +sliderBox.dataset.displacement;
+    let displacement = +sliderBox.dataset.displacement;
 
     // initial displacement of the first slide
-    const initialDisplacement = +sliderBox.dataset.initialDisplacement;
+    let initialDisplacement = +sliderBox.dataset.initialDisplacement;
+
+    if (sliderBox.getAttribute("data-initial-displacement-500") && window.innerWidth <= 500) {
+      displacement = +sliderBox.getAttribute("data-displacement-500");
+      initialDisplacement = +sliderBox.getAttribute("data-initial-displacement-500");
+      console.log(sliderBox.dataset.displacement500);
+    }
 
     const isDragable = sliderBox.dataset.dragable === "1";
 
@@ -95,7 +101,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     sliderBox.style.height = height + "px";
-    if (i == 2) arrowBox2.style.height = height + "px";
+    if (i == 2) {
+      arrowBox2.style.height = height + "px";
+      if (window.innerWidth <= 500) arrowBox2.style.height = parseFloat(window.getComputedStyle(document.querySelector(".floor-wireframe")).height) - 5 + "px";
+    }
 
     slides = document.querySelectorAll(`.slider-${i} .slide`);
     slidesCount = slides.length;
@@ -108,7 +117,10 @@ document.addEventListener('DOMContentLoaded', function () {
         sliderBox.style.height = height;
       });
       sliderBox.style.height = height + "px";
-      if (i == 2) arrowBox2.style.height = height + "px";
+      if (i == 2) {
+        arrowBox2.style.height = height + "px";
+        if (window.innerWidth <= 500) arrowBox2.style.height = parseFloat(window.getComputedStyle(document.querySelector(".floor-wireframe")).height) - 5 + "px";
+      }
     })
 
     const removeExtraSlide = () => {
@@ -244,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // add eventListener to btns
-    leftBtn.addEventListener("click", (e) => {
+    leftBtn && leftBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       if (isButtonDisabled) return;
@@ -264,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    rightBtn.addEventListener("click", (e) => {
+    rightBtn && rightBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       if (isButtonDisabled) return;

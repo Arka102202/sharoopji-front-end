@@ -23,6 +23,14 @@
     font-family: "cera";
 }
 
+.desk {
+    display: block;
+}
+
+.mob {
+    display: none;
+}
+
 html {
     --main-clr: #10997c;
     --border-rad: .2rem;
@@ -64,6 +72,14 @@ html {
     :root {
         font-size: 8px;
     }
+
+    .desk {
+        display: none;
+    }
+
+    .mob {
+        display: block;
+    }
 }
 
 /* general */
@@ -92,6 +108,25 @@ section {
     margin: auto;
 }
 
+@media (max-width: 500px) {
+    .heading p {
+        font-size: 4.5vh;
+    }
+
+    .sub-heading p {
+        font-size: 2.5vh;
+    }
+
+    h5,
+    p {
+        font-size: 1.5vh;
+    }
+
+    section {
+        padding: 6vh 8vw;
+    }
+}
+
 /* slider section */
 
 .silder-box {
@@ -108,12 +143,7 @@ section {
 .slider {
     overflow: hidden;
     position: relative;
-    /* height: 100vh; */
     width: 100%;
-    /* margin: auto; */
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center; */
 }
 
 .slide {
@@ -239,6 +269,20 @@ nav p {
     width: 10%;
 }
 
+@media (max-width: 500px) {
+    .logo-box--1 {
+        width: 25%;
+    }
+
+    .logo-box--2 {
+        width: 35%;
+    }
+
+    nav {
+        display: none;
+    }
+}
+
 /* hero section */
 
 .hero-sec {
@@ -261,6 +305,7 @@ nav p {
     padding-bottom: 5vw;
     color: #fff;
 }
+
 
 .top-heading-1 {
     font-size: 3rem;
@@ -288,6 +333,21 @@ nav p {
     font-weight: lighter;
 }
 
+@media (max-width: 500px) {
+    .hero-sec {
+        aspect-ratio: 2/3;
+        justify-content: center;
+    }
+
+    .top-heading-1 {
+        font-size: 5vh;
+    }
+
+    .top-heading-2 {
+        font-size: 2.5vh;
+    }
+}
+
 /* feature section */
 
 .feature-sec {
@@ -311,6 +371,20 @@ nav p {
     text-align: center;
 }
 
+@media (max-width: 500px) {
+    .slider-1-slide {
+        width: 50%;
+    }
+
+    .slider-1-slide img {
+        width: 45%;
+    }
+
+    .arrow-box-1 {
+        display: none;
+    }
+}
+
 /* floor-plan */
 .floor-plan {
     padding-top: 2vw;
@@ -327,6 +401,8 @@ nav p {
     gap: .5rem;
 
     margin: 0;
+
+    position: relative;
 }
 
 
@@ -363,6 +439,36 @@ nav p {
 .floor-plan .arrow-box .left-arr img,
 .floor-plan .arrow-box .right-arr img {
     filter: invert(1);
+}
+
+.building-2 {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .slider-2-slide {
+        grid-template-columns: 1fr;
+
+        flex: 1 0 0%;
+    }
+
+    .building-1 {
+        display: none;
+    }
+
+    .building-2 {
+        display: block;
+    }
+
+    .floor-wireframe {
+        width: 75%;
+    }
+
+    .floor-plan .arrow-box {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
 }
 
 /* gallery */
@@ -435,6 +541,16 @@ nav p {
     background-color: #fff;
 }
 
+@media (max-width: 500px) {
+    .slider-3-slide {
+        width: 100%;
+    }
+
+    .gallery .arrow-box {
+        display: none;
+    }
+}
+
 /* amenity-sec */
 
 .amenity-sec {
@@ -473,6 +589,12 @@ nav p {
 @media (max-width: 767px) {
     .amenity-sec {
         height: 55vh;
+    }
+}
+
+@media (max-width: 500px) {
+    .amenity-sec {
+        height: auto;
     }
 }
 
@@ -537,6 +659,40 @@ nav p {
     transition: all .5s ease-in-out;
 }
 
+.amenity-sec .silder-box {
+    display: none;
+}
+
+
+@media (max-width: 500px) {
+    .amenity-sec {
+        grid-template-columns: 1fr;
+    }
+
+    .amenity-sec .left-box,
+    .amenity-sec .middle-vdo-box,
+    .amenity-sec .right-box {
+        display: none;
+    }
+
+    .amenity-sec .center-box .heading {
+        width: 100%;
+    }
+
+    .amenity-sec .silder-box {
+        display: flex;
+        margin: 0;
+    }
+
+    .slider-4-slide {
+        width: 100%;
+    }
+
+    .gallery .arrow-box {
+        display: none;
+    }
+}
+
 
 /* connect-sec */
 
@@ -562,6 +718,12 @@ nav p {
 
     width: 100%;
 
+    order: 1;
+
+}
+
+.connect-sec .left-box .silder-box {
+    display: none;
 }
 
 .connect-img-box {
@@ -587,10 +749,41 @@ nav p {
     height: 100%;
 
     overflow: hidden;
+
+    order: 2;
 }
 
 .connect-sec .right-box img {
     transition: all .2s;
+}
+
+@media (max-width: 500px) {
+    .connect-sec {
+        grid-template-columns: 1fr;
+    }
+
+    .connect-sec .left-box {
+        order: 2;
+    }
+
+    .connect-sec .right-box {
+        flex-direction: column;
+
+        order: 1;
+    }
+
+    .connect-sec .left-box .connect-img-box {
+        display: none;
+    }
+
+    .connect-sec .left-box .silder-box {
+        display: flex;
+        margin: 0;
+    }
+
+    .slider-5-slide {
+        width: 30%;
+    }
 }
 
 /* about section */
